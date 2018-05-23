@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="section s-de">
+        <div class="container">
+            <div class="heading-wrap">
+                <h1>Book store</h1>
+            </div>
+            <div class="section-descr">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, adipisci assumenda atque debitis deleniti
+                deserunt, doloribus enim hic, maxime minus modi molestiae neque nobis omnis placeat ratione reiciendis
+                reprehenderit unde?
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur dolores ducimus eos ex fugiat
+                nesciunt, optio perferendis quasi quia quis reiciendis saepe sequi temporibus unde vel, velit vero
+                voluptates. <br>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, deleniti dignissimos dolores
+                dolorum eum excepturi inventore ipsa, nesciunt nostrum possimus reiciendis repellat reprehenderit rerum
+                saepe temporibus unde ut voluptas voluptates?<br><br><br>
+            </div>
+            <div class="books">
+                <p>
+                    <label for="order">Order by publish date:</label>
+                    <select name="order" id="order" onchange="var el = document.getElementById('order'); window.location.href=window.location.pathname+'?order='+el.options[el.selectedIndex].value">
+                        <option value="0" {% if not order %}selected{% endif %}>Asc</option>
+                        <option value="1" {% if order %}selected{% endif %}>Desc</option>
+                    </select>
+                </p>
+                <ol>
+                    {% for item in books %}
+
+                        <li>
+                            <div class="mix {{ item.get_string_type }} article-item-column">
+                                <p><a href="/book/{{ item.id }}" class="article-item">{{ item.title }}</a></p>
+                                <p>ISBN: {{ item.isbn }}</p>
+                                <p>Price: ${{ item.price }}</p>
+                                <p>Author: {{ item.author_info }}</p>
+                                <p><a href="/admin/book/book/{{ item.id }}/change/">Change this book (needs admin rights)</a></p>
+                            </div>
+                            <br><br>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
